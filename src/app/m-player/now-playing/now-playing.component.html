@@ -1,0 +1,47 @@
+<div class="dashboard">
+   <!-- Header -->
+   <header>
+      <h4>Now playing:</h4>
+      <h2>{{selectedSong?.name}}</h2>
+   </header>
+
+   <!-- CD -->
+   <div class="cd" #cd>
+      <div class="cd-thumb" #vinyl style="background-image: url('{{selectedSong?.image}}')">
+      </div>
+   </div>
+
+   <!-- Control -->
+   <div class="control">
+      <div class="btn btn-volume" #btnVolume (mouseover)="onMouseOverBtnVolume()" (mouseout)="onMouseOutBtnVolume()">
+         <i class="fas fa-volume-up" #volumeIcon></i>
+         <div class="volume-bar-value" #volumeBarValue></div>
+         <input id="volume-bar" class="volume-bar" #volumeBar (change)="onChangeVolume($event)" type="range" value="100"
+            step="1" min="0" max="100">
+      </div>
+      <div class="btn btn-repeat" (click)="onRepeat()" [ngClass]="!isRepeat ? '' : 'active'">
+         <i class="fas fa-redo"></i>
+      </div>
+      <div class="btn btn-prev" (click)="onPrevSong()">
+         <i class="fas fa-step-backward"></i>
+      </div>
+      <div class="btn btn-toggle-play" (click)="onPlay()">
+         <i class="fas" [ngClass]="!isPlaying ? 'fa-play' : 'fa-pause'"></i>
+      </div>
+      <div class="btn btn-next" (click)="onNextSong()">
+         <i class="fas fa-step-forward"></i>
+      </div>
+      <div class="btn btn-random" (click)="onRandomSong()" [ngClass]="!isRandom ? '' : 'active'">
+         <i class="fas fa-random"></i>
+      </div>
+      <div class="btn btn-favorite">
+         <i class="fas fa-heart"></i>
+      </div>
+   </div>
+
+   <div class="progressPlay" [ngStyle]="{'width.px': progressWidth}"></div>
+   <input id="progress" #progressBar class="progress" type="range" [value]="progress.value"
+      (change)="onChangeProgress($event)" step="1" min="0" max="100">
+
+   <audio id="audio" #audio src="{{selectedSong?.path}}" (timeupdate)="onTimeUpdate()" crossOrigin="anonymous"></audio>
+</div>

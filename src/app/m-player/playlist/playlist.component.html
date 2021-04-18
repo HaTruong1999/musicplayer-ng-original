@@ -1,0 +1,14 @@
+<div class="playlist">
+   <div *ngFor="let song of songs; index as i" class="song" [ngClass]="{'active': songs[i].id === selectedSong?.id}"
+      (click)="onSelect(songs[i])">
+      <div class="thumb" style="background-image: url('{{song.image}}')">
+      </div>
+      <div class="body">
+         <h3 class="title">{{song.name}}</h3>
+         <p class="author">{{song.singer}}</p>
+      </div>
+      <div class="favorite">
+         <i class="fas fa-ellipsis-h"></i>
+      </div>
+   </div>
+</div>
